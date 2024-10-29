@@ -1,0 +1,75 @@
+import React, { useState, useEffect } from 'react';
+import GlobalApi from '../services/GlobalApi'; // Pastikan path sesuai dengan lokasi file GlobalApi.js
+
+const SearchBar = () => {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Debounce logic to delay the search request
+    const debounceTimeout = setTimeout(() => {
+      const fetchResults = async () => {
+        if (query.trim() === '') {
+          setResults([]);
+          return;
+        }
+
+        setLoading(true);
+        setError(null);
+
+        try {
+          const response = await GlobalApi.searchMovies(query); // Menggunakan fungsi dari GlobalApi
+          console.log('API Response:', response.data); // Debugging
+          setResults(response.data.results);
+        } catch (err) {
+          console.error('Error fetching data:', err); // Debugging
+          setError('Failed to fetch results');
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchResults();
+    }, 300); // Adjust debounce delay as needed
+
+    return () => clearTimeout(debounceTimeout); // Clean up the timeout on query change or unmount
+  }, [query]);
+
+  return (
+    <div className="p-4 max-w-lg mx-auto">
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search for movies..."
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"/>
+      {loading && <p className="mt-4 text-center">Loading...</p>}
+      {error && <p className="mt-4 text-red-500 text-center">{error}</p>}
+      {results.length === 0 && !loading && !error && (
+        <p className="mt-4 text-center">No results found</p>
+      )}
+      <ul className="mt-4 space-y-4">
+        {results.length > 0 && results.map((movie) => (
+          <li key={movie.id} className="p-4 border border-gray-200 rounded-lg">
+            <h2 className="text-xl font-bold">{movie.title}</h2>
+            <p>{movie.overview}</p>
+            <p className="text-sm text-gray-600">Release Date: {movie.release_date}</p>
+            {movie.poster_path ? (
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.title}
+                className="mt-2 w-32 h-auto rounded-lg"
+              />
+            ) : (
+              <p>No poster available</p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default SearchBar;
