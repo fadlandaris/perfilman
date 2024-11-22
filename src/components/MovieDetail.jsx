@@ -49,6 +49,7 @@ const MovieDetail = () => {
                   </span>
                 ))}
                 <span> · {Math.floor(movieDetail.runtime / 60)}h {movieDetail.runtime % 60}m</span>
+                <p className='mt-10'>{movieDetail.overview}</p>
               </div>
             </div>
 

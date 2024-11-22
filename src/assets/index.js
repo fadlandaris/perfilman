@@ -7,6 +7,7 @@ import { PiTelevisionLight } from "react-icons/pi";
 import { IoMdClose } from "react-icons/io";
 import { FaAngleRight, FaAngleLeft } from "react-icons/fa6";
 import { SiImdb } from "react-icons/si";
+import Profile from "../components/Profile";
 
 export {
   GoHome,
@@ -58,7 +59,7 @@ export {
   logo,
   noPoster,
   warn,
-  noResults
+  noResults,
 }
 
 // video

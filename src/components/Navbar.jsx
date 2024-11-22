@@ -42,8 +42,11 @@ const Navbar = () => {
           </ul>
         </div>
       </div> 
+        
+      <a href="/profile">
+        <img src={profile} className="w-[40px] h-[40px] object-cover hidden md:flex rounded-full " />
+      </a>
       
-      <img src={profile} className="w-[40px] h-[40px] object-cover hidden md:flex rounded-full " />
    </nav>
   );
 };

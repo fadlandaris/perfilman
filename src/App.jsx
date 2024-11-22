@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import styles from './style';
-import { Navbar, Slider, Studio, Genres, SearchBar, MovieDetail } from './components';
+import { Navbar, Slider, Studio, Genres, SearchBar, MovieDetail, Profile } from './components';
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
         } />
         
         <Route path="/movie/:id/:slug" element={<MovieDetail />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

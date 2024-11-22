@@ -7,6 +7,7 @@ import GenresMovieList from "./GenresMovieList";
 import MovieCard from "./MovieCard";
 import SearchBar from "./SearchBar";
 import MovieDetail from "./MovieDetail";
+import Profile from "./Profile";
 
 export {
   Navbar,
@@ -18,4 +19,5 @@ export {
   MovieCard,
   SearchBar,
   MovieDetail,
+  Profile,
 }

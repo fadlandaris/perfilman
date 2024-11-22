@@ -15,7 +15,7 @@ const HrMovieCard = ({ movieCard }) => {
   };
 
   return (
-    <section className='group' key={movieCard.id} onClick={handleClick}>
+    <section className='group ' key={movieCard.id} onClick={handleClick}>
       <div className='rounded-lg bg-third hover:opacity-50 border-tertiary transition-all duration-30 cursor-pointer ease-in-out group'>
         <img src={IMAGE_BASE_URL + movieCard.backdrop_path} alt="" className='w-full rounded-tl-lg rounded-tr-lg transition-all duration-100 cursor-pointer ease-in-out shadow-md relative object-center' />
         <div className='py-6 px-6 text-tertiary h-[200px]'>
